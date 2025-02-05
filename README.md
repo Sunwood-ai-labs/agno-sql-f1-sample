@@ -23,88 +23,43 @@
 > [!NOTE]
 > 必要に応じてリポジトリをフォークしてクローンしてください。
 
-## 🚀 セットアップ手順
+## 🚀 クイックスタート
 
-### 🌱 1. 仮想環境の作成
+### Docker Composeで起動
 
-```shell
-python3 -m venv .venv
-source .venv/bin/activate
+1. 環境変数の設定
+```bash
+# .envファイルを作成し、必要なAPIキーを設定
+cp .env.example .env
+# 以下のAPIキーを.envファイルに設定してください
+# - OPENAI_API_KEY（必須）
+# - ANTHROPIC_API_KEY（オプション）
+# - GOOGLE_API_KEY（オプション）
+# - GROQ_API_KEY（オプション）
 ```
 
-### 📦 2. ライブラリのインストール
-
-```shell
-pip install -r cookbook/examples/apps/sql_agent/requirements.txt
+2. アプリケーションの起動
+```bash
+docker compose up -d
 ```
 
-### 🐳 3. PgVectorの実行
+これだけで以下のサービスが自動的に起動します：
+- PostgreSQL (pgvector): `localhost:5532`でアクセス可能
+- SQLエージェントUI: `localhost:8509`でアクセス可能
 
-データの保存にはPostgresを使用しますが、SQLエージェントは任意のデータベースで動作します。
+> [!NOTE]
+> - 初回起動時は、F1データとナレッジベースの読み込みが自動的に行われます
+> - データの読み込みには数分かかる場合があります
 
-> 最初に[docker desktop](https://docs.docker.com/desktop/install/mac-install/)をインストールしてください。
-
-- ヘルパースクリプトを使用して実行
-
-```shell
-./cookbook/run_pgvector.sh
+3. アプリケーションの停止
+```bash
+docker compose down
 ```
 
-- または docker run コマンドを使用して実行
-
-```shell
-docker run -d \
-  -e POSTGRES_DB=ai \
-  -e POSTGRES_USER=ai \
-  -e POSTGRES_PASSWORD=ai \
-  -e PGDATA=/var/lib/postgresql/data/pgdata \
-  -v pgvolume:/var/lib/postgresql/data \
-  -p 5532:5432 \
-  --name pgvector \
-  agnohq/pgvector:16
+データを完全に削除する場合：
+```bash
+docker compose down -v
 ```
-
-### 🏎️ 4. F1データの読み込み
-
-```shell
-python cookbook/examples/apps/sql_agent/load_f1_data.py
-```
-
-### 📚 5. ナレッジベースの読み込み
-
-ナレッジベースには、テーブルのメタデータ、ルール、サンプルクエリが含まれており、エージェントはこれらを使用してより良い応答を生成します。
-
-以下の項目を必要に応じて追加することをお勧めします：
-  - テーブルメタデータに`table_rules`と`column_rules`を追加します。エージェントはこれらのルールに従うように設計されています。特定の形式で日付を照会したり、特定のカラムを避けたりする場合に便利です。
-  - `cookbook/use_cases/apps/sql_agent/knowledge_base/sample_queries.sql`ファイルにサンプルSQLクエリを追加します。これにより、アシスタントは複雑なクエリの作成方法を学習できます。
-
-```shell
-python cookbook/examples/apps/sql_agent/load_knowledge.py
-```
-
-### 🔑 6. APIキーのエクスポート
-
-このタスクにはgpt-4oの使用を推奨しますが、任意のモデルを使用することができます。
-
-```shell
-export OPENAI_API_KEY=***
-```
-
-他のAPIキーはオプションですが、テストする場合は以下を設定してください：
-
-```shell
-export ANTHROPIC_API_KEY=***
-export GOOGLE_API_KEY=***
-export GROQ_API_KEY=***
-```
-
-### 🚀 7. SQLエージェントの実行
-
-```shell
-streamlit run cookbook/examples/apps/sql_agent/app.py
-```
-
-- [localhost:8501](http://localhost:8501)を開いてSQLエージェントを表示します。
 
 ## 💬 サポート
 
