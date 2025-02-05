@@ -17,7 +17,7 @@ nest_asyncio.apply()
 
 # Page configuration
 st.set_page_config(
-    page_title="F1 SQL Agent",
+    page_title="F1 SQLエージェント",
     page_icon=":checkered_flag:",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -31,9 +31,9 @@ def main() -> None:
     ####################################################################
     # App header
     ####################################################################
-    st.markdown("<h1 class='main-title'>F1 SQL Agent</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 class='main-title'>F1 SQLエージェント</h1>", unsafe_allow_html=True)
     st.markdown(
-        "<p class='subtitle'>Your intelligent F1 data analyst powered by Agno</p>",
+        "<p class='subtitle'>Agnoを活用したインテリジェントなF1データアナリスト</p>",
         unsafe_allow_html=True,
     )
 
@@ -46,7 +46,7 @@ def main() -> None:
         "claude-3-5-sonnet": "anthropic:claude-3-5-sonnet-20241022",
     }
     selected_model = st.sidebar.selectbox(
-        "Select a model",
+        "モデルを選択",
         options=list(model_options.keys()),
         index=0,
         key="model_selector",
@@ -102,7 +102,7 @@ def main() -> None:
     ####################################################################
     # Get user input
     ####################################################################
-    if prompt := st.chat_input("👋 Ask me about F1 data from 1950 to 2020!"):
+    if prompt := st.chat_input("👋 1950年から2020年までのF1データについて質問してください！"):
         add_message("user", prompt)
 
     ####################################################################
@@ -130,7 +130,7 @@ def main() -> None:
             # Create container for tool calls
             tool_calls_container = st.empty()
             resp_container = st.empty()
-            with st.spinner("🤔 Thinking..."):
+            with st.spinner("🤔 考え中..."):
                 response = ""
                 try:
                     # Run the agent and stream the response

@@ -12,12 +12,12 @@ def load_data_and_knowledge():
     from load_knowledge import load_knowledge
 
     if "data_loaded" not in st.session_state:
-        with st.spinner("🔄 Loading data into database..."):
+        with st.spinner("🔄 データベースにデータを読み込んでいます..."):
             load_f1_data()
-        with st.spinner("📚 Loading knowledge base..."):
+        with st.spinner("📚 ナレッジベースを読み込んでいます..."):
             load_knowledge()
         st.session_state["data_loaded"] = True
-        st.success("✅ Data and knowledge loaded successfully!")
+        st.success("✅ データとナレッジベースの読み込みが完了しました！")
 
 
 def add_message(
@@ -45,9 +45,9 @@ def restart_agent():
 def export_chat_history():
     """Export chat history as markdown"""
     if "messages" in st.session_state:
-        chat_text = "# F1 SQL Agent - Chat History\n\n"
+        chat_text = "# F1 SQLエージェント - チャット履歴\n\n"
         for msg in st.session_state["messages"]:
-            role = "🤖 Assistant" if msg["role"] == "agent" else "👤 User"
+            role = "🤖 アシスタント" if msg["role"] == "agent" else "👤 ユーザー"
             chat_text += f"### {role}\n{msg['content']}\n\n"
         return chat_text
     return ""
@@ -93,54 +93,51 @@ def sidebar_widget() -> None:
     """Display a sidebar with sample user queries"""
     with st.sidebar:
         # Basic Information
-        st.markdown("#### 🏎️ Basic Information")
-        if st.button("📋 Show Tables"):
-            add_message("user", "Which tables do you have access to?")
-        if st.button("ℹ️ Describe Tables"):
-            add_message("user", "Tell me more about these tables.")
+        st.markdown("#### 🏎️ 基本情報")
+        if st.button("📋 テーブル一覧"):
+            add_message("user", "利用可能なテーブルを教えてください")
+        if st.button("ℹ️ テーブル詳細"):
+            add_message("user", "これらのテーブルについて詳しく説明してください")
 
         # Statistics
-        st.markdown("#### 🏆 Statistics")
-        if st.button("🥇 Most Race Wins"):
-            add_message("user", "Which driver has the most race wins?")
+        st.markdown("#### 🏆 統計情報")
+        if st.button("🥇 レース優勝数"):
+            add_message("user", "最も多くのレースに優勝したドライバーは誰ですか？")
 
-        if st.button("🏆 Constructor Champs"):
-            add_message("user", "Which team won the most Constructors Championships?")
+        if st.button("🏆 コンストラクターズチャンピオン"):
+            add_message("user", "コンストラクターズチャンピオンシップで最も多く優勝したチームはどこですか？")
 
-        if st.button("⏳ Longest Career"):
+        if st.button("⏳ 最長キャリア"):
             add_message(
                 "user",
-                "Tell me the name of the driver with the longest racing career? Also tell me when they started and when they retired.",
+                "最も長いレーシングキャリアを持つドライバーの名前と、そのキャリアの開始時期と終了時期を教えてください"
             )
 
         # Analysis
-        st.markdown("#### 📊 Analysis")
-        if st.button("📈 Races per Year"):
-            add_message("user", "Show me the number of races per year.")
+        st.markdown("#### 📊 分析")
+        if st.button("📈 年間レース数"):
+            add_message("user", "年間のレース数の推移を表示してください")
 
-        if st.button("🔍 Team Performance"):
+        if st.button("🔍 チームパフォーマンス"):
             add_message(
                 "user",
-                "Write a query to identify the drivers that won the most races per year from 2010 onwards and the position of their team that year.",
+                "2010年以降、各年で最も多くのレースに勝利したドライバーとそのチームの順位を分析してください"
             )
 
         # Utility buttons
-        st.markdown("#### 🛠️ Utilities")
+        st.markdown("#### 🛠️ ユーティリティ")
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("🔄 New Chat"):
+            if st.button("🔄 新規チャット"):
                 restart_agent()
         with col2:
             if st.download_button(
-                "💾 Export Chat",
+                "💾 チャット履歴の保存",
                 export_chat_history(),
                 file_name="f1_chat_history.md",
                 mime="text/markdown",
             ):
-                st.success("Chat history exported!")
-
-        if st.sidebar.button("🚀 Load Data & Knowledge"):
-            load_data_and_knowledge()
+                pass
 
 
 def session_selector_widget(agent: Agent, model_id: str) -> None:
