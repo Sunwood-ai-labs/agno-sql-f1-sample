@@ -2,7 +2,7 @@
 
 ![SQL Agent Header](https://github.com/user-attachments/assets/a3979ece-da40-492c-87a2-e52b56c9f7e2)
 
-# SQL エージェント
+# Agno SQL F1 sample
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-brightgreen)](https://openai.com/)
@@ -19,24 +19,25 @@
 
 このエージェントはAgentic RAGを使用してテーブルのメタデータとルールを検索し、より良いSQLクエリを作成・実行することができます。
 
-> [!NOTE]：必要に応じてリポジトリをフォークしてクローンしてください。
+> [!NOTE]
+> 必要に応じてリポジトリをフォークしてクローンしてください。
 
-### 🚀 セットアップ手順
+## 🚀 セットアップ手順
 
-#### 🌱 1. 仮想環境の作成
+### 🌱 1. 仮想環境の作成
 
 ```shell
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-#### 📦 2. ライブラリのインストール
+### 📦 2. ライブラリのインストール
 
 ```shell
 pip install -r cookbook/examples/apps/sql_agent/requirements.txt
 ```
 
-#### 🐳 3. PgVectorの実行
+### 🐳 3. PgVectorの実行
 
 データの保存にはPostgresを使用しますが、SQLエージェントは任意のデータベースで動作します。
 
@@ -62,13 +63,13 @@ docker run -d \
   agnohq/pgvector:16
 ```
 
-#### 🏎️ 4. F1データの読み込み
+### 🏎️ 4. F1データの読み込み
 
 ```shell
 python cookbook/examples/apps/sql_agent/load_f1_data.py
 ```
 
-#### 📚 5. ナレッジベースの読み込み
+### 📚 5. ナレッジベースの読み込み
 
 ナレッジベースには、テーブルのメタデータ、ルール、サンプルクエリが含まれており、エージェントはこれらを使用してより良い応答を生成します。
 
@@ -80,7 +81,7 @@ python cookbook/examples/apps/sql_agent/load_f1_data.py
 python cookbook/examples/apps/sql_agent/load_knowledge.py
 ```
 
-#### 🔑 6. APIキーのエクスポート
+### 🔑 6. APIキーのエクスポート
 
 このタスクにはgpt-4oの使用を推奨しますが、任意のモデルを使用することができます。
 
@@ -96,7 +97,7 @@ export GOOGLE_API_KEY=***
 export GROQ_API_KEY=***
 ```
 
-#### 🚀 7. SQLエージェントの実行
+### 🚀 7. SQLエージェントの実行
 
 ```shell
 streamlit run cookbook/examples/apps/sql_agent/app.py
@@ -104,11 +105,11 @@ streamlit run cookbook/examples/apps/sql_agent/app.py
 
 - [localhost:8501](http://localhost:8501)を開いてSQLエージェントを表示します。
 
-### 💬 サポート
+## 💬 サポート
 
 質問がある場合は[Discord](https://agno.link/discord)でお問い合わせください。
 
-### 🛠️ 技術スタック
+## 🛠️ 技術スタック
 
 - Python 3.9+
 - OpenAI GPT-4
@@ -117,6 +118,6 @@ streamlit run cookbook/examples/apps/sql_agent/app.py
 - Docker
 - Agentic RAG
 
-### 📄 ライセンス
+## 📄 ライセンス
 
 このプロジェクトは[MIT License](LICENSE)の下で公開されています。
