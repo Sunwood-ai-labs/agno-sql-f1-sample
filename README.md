@@ -5,6 +5,7 @@
 # Agno SQL F1 sample
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![Agno](https://img.shields.io/badge/Framework-Agno-purple)](https://docs.agno.com/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-brightgreen)](https://openai.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)](https://www.postgresql.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.41-red)](https://streamlit.io/)
@@ -111,12 +112,21 @@ streamlit run cookbook/examples/apps/sql_agent/app.py
 
 ## 🛠️ 技術スタック
 
+- [Agno](https://docs.agno.com) - 軽量なマルチモーダルエージェントフレームワーク
+  - シンプルな設計：グラフやチェーンを使用せず、純粋なPythonで実装
+  - 高性能：最小限のメモリフットプリントで高速なエージェント実行
+  - モデル非依存：任意のモデル、プロバイダー、モダリティに対応
+  - マルチモーダル：テキスト、画像、音声、動画のネイティブサポート
+  - マルチエージェント：専門化されたエージェント間でのタスク委譲
+  - メモリ管理：ユーザーセッションとエージェントの状態をデータベースに保存
+  - ナレッジストア：Agentic RAGまたは動的few-shotのためのベクトルデータベース
+  - 構造化出力：エージェントが構造化データで応答
+  - モニタリング：エージェントのセッションとパフォーマンスをリアルタイムで追跡
 - Python 3.9+
 - OpenAI GPT-4
-- PostgreSQL 16
+- PostgreSQL 16 (pgvector)
 - Streamlit 1.41
 - Docker
-- Agentic RAG
 
 ## 📄 ライセンス
 
