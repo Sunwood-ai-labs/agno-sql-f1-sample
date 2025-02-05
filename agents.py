@@ -39,8 +39,16 @@ from agno.tools.file import FileTools
 from agno.tools.sql import SQLTools
 from agno.vectordb.pgvector import PgVector
 
+import os
+
 # ************* Database Connection *************
-db_url = "postgresql+psycopg://ai:ai@localhost:5532/ai"
+
+# Dockerコンテナ内かどうかを判定
+IN_DOCKER = os.path.exists('/.dockerenv')
+
+# Docker環境では'pgvector'、それ以外では'localhost'を使用
+DB_HOST = 'pgvector' if IN_DOCKER else 'localhost'
+db_url = f"postgresql+psycopg://ai:ai@{DB_HOST}:5432/ai"
 # *******************************
 
 # ************* Paths *************

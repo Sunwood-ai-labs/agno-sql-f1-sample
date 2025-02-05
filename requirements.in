@@ -7,3 +7,5 @@ simplejson
 sqlalchemy
 streamlit
 nest_asyncio
+anthropic
+google-generativeai
