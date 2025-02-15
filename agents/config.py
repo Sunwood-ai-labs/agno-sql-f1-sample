@@ -9,7 +9,11 @@ IN_DOCKER = os.path.exists('/.dockerenv')
 
 # Docker環境では'pgvector'、それ以外では'localhost'を使用
 DB_HOST = 'pgvector' if IN_DOCKER else 'localhost'
-DB_URL = f"postgresql+psycopg://ai:ai@{DB_HOST}:5432/ai"
+
+# ポート番号を設定（Docker環境では5432、それ以外ではPOSTGRES_PORT環境変数か5432）
+DB_PORT = '5432' if IN_DOCKER else os.getenv('POSTGRES_PORT', '5432')
+
+DB_URL = f"postgresql+psycopg://ai:ai@{DB_HOST}:{DB_PORT}/ai"
 
 # ************* Paths *************
 CWD = Path(__file__).parent.parent
