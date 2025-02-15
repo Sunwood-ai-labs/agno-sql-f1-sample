@@ -9,3 +9,5 @@ streamlit
 nest_asyncio
 anthropic
 google-generativeai
+loguru
+google-genai
