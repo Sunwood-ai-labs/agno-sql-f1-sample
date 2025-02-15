@@ -15,6 +15,8 @@ from .config import DB_URL, OUTPUT_DIR
 from .knowledge import agent_knowledge, agent_storage
 from .semantic_model import semantic_model_str
 
+import os
+
 def load_prompt(filename: str) -> str:
     """Load prompt content from a markdown file.
     
