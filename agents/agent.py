@@ -3,9 +3,9 @@
 from pathlib import Path
 from textwrap import dedent
 from typing import Optional
+import os
 
 from agno.agent import Agent
-from agno.models.anthropic import Claude
 from agno.models.google import Gemini
 from agno.models.openai import OpenAIChat
 from agno.tools.file import FileTools
@@ -14,8 +14,6 @@ from agno.tools.sql import SQLTools
 from .config import DB_URL, OUTPUT_DIR
 from .knowledge import agent_knowledge, agent_storage
 from .semantic_model import semantic_model_str
-
-import os
 
 def load_prompt(filename: str) -> str:
     """Load prompt content from a markdown file.
@@ -29,6 +27,7 @@ def load_prompt(filename: str) -> str:
     prompt_dir = Path(__file__).parent / "prompts"
     prompt_path = prompt_dir / f"{filename}.md"
     return prompt_path.read_text(encoding="utf-8")
+
 
 def get_sql_agent(
     user_id: Optional[str] = None,
@@ -50,10 +49,14 @@ def get_sql_agent(
     # Select appropriate model class based on provider
     if provider == "openai":
         model = OpenAIChat(id=model_name)
+    elif provider == "litellm":
+        model = OpenAIChat(
+            id=model_name,
+            base_url=os.getenv("LITELLM_BASE_URL"),
+            api_key=os.getenv("LITELLM_API_KEY")
+        )
     elif provider == "google":
         model = Gemini(id=model_name)
-    elif provider == "anthropic":
-        model = Claude(id=model_name)
     else:
         raise ValueError(f"Unsupported model provider: {provider}")
 
