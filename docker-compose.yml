@@ -22,11 +22,6 @@ services:
   # SQLエージェントアプリケーション
   sql_agent:
     build: .
-    environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-      - GROQ_API_KEY=${GROQ_API_KEY}
     volumes:
       - .:/app
       - ./data:/app/data
@@ -35,7 +30,9 @@ services:
     depends_on:
       pgvector:
         condition: service_healthy
-
+    env_file:
+      - .env
+      
 volumes:
   pgdata:
     name: pgvector_data
