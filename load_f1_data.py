@@ -2,7 +2,7 @@ from io import StringIO
 
 import pandas as pd
 import requests
-from agents import db_url
+from agents.config import DB_URL
 from agno.utils.log import logger
 from sqlalchemy import create_engine
 
@@ -22,7 +22,7 @@ def load_f1_data():
     """Load F1 data into the database"""
 
     logger.info("Loading database.")
-    engine = create_engine(db_url)
+    engine = create_engine(DB_URL)
 
     # Load each CSV file into the corresponding PostgreSQL table
     for file_path, table_name in files_to_tables.items():
