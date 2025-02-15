@@ -44,7 +44,7 @@ docker compose up -d
 ```
 
 これだけで以下のサービスが自動的に起動します：
-- PostgreSQL (pgvector): `localhost:5532`でアクセス可能
+- PostgreSQL (pgvector): `localhost:5432`でアクセス可能
 - SQLエージェントUI: `localhost:8509`でアクセス可能
 
 > [!NOTE]
