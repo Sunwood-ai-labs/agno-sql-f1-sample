@@ -44,6 +44,7 @@ def main() -> None:
         "gpt-4o": "openai:gpt-4o",
         "gemini-2.0-flash-exp": "google:gemini-2.0-flash-exp",
         "claude-3-5-sonnet": "anthropic:claude-3-5-sonnet-20241022",
+        "litellm:Anthropic/claude-3-5-sonnet-20241022": "litellm:Anthropic/claude-3-5-sonnet-20241022",
     }
     selected_model = st.sidebar.selectbox(
         "モデルを選択",
