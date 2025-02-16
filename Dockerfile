@@ -16,6 +16,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # ソースコードをコピー
 COPY . .
 
+# custum agnoをインストール
+RUN pip install git+https://github.com/Sunwood-ai-labs/agno.git#subdirectory=libs/agno
+
 # 実行時の環境変数を設定
 ENV PYTHONUNBUFFERED=1
 
