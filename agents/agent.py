@@ -53,7 +53,9 @@ def get_sql_agent(
         model = OpenAIChat(
             id=model_name,
             base_url=os.getenv("LITELLM_BASE_URL"),
-            api_key=os.getenv("LITELLM_API_KEY")
+            api_key=os.getenv("LITELLM_API_KEY"),
+            metadata={"user_id": "demo_user",
+                      "trace_user_id": "demo_trace_user"},
         )
     elif provider == "google":
         model = Gemini(id=model_name)
